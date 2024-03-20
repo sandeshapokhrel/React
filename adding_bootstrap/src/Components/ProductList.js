@@ -10,11 +10,12 @@ import Product from './Product';
 // export default function ProductList({product}) { 
   //  console.log(product)
 // Using props:-
-//for loop can be use in jsx we need to use map finction, foreach 
+//for loop can be use in jsx we need to use map function, foreach 
 export default function ProductList (props) {
-  return (
-    props.productlist.map((product)=>{
-        return <Product product={product} />
+ return (
+    props.productlist.map((product, index)=>{
+      console.log(product);
+        return <Product key={index} product={product} />
     })
   )
 }
