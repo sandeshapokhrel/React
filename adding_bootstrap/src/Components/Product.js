@@ -5,7 +5,7 @@ export default function Product(props) //in props all the productlist will be th
   return (
     <div className='row'>
       <div className='col-6'></div>
-      <h2>{props.name}</h2>
+      <h2>{props.product.name}</h2> {/* communication between components */}
     </div>
   )
 }

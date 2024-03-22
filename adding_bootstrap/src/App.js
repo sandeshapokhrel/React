@@ -19,7 +19,9 @@ function App() {
   return (
     <div>
       <Navbar/>
+      <main className='container mt-5'>
       <ProductList productlist={productlist}/> 
+      </main>
     </div>
   );
 }
