@@ -15,7 +15,7 @@ export default function ProductList (props) {
  return (
     props.productlist.map((product, index)=>{
       console.log(product);
-        return <Product key={index} product={product} />
+        return <Product key={index} product={product} incrementQuantity={props.incrementQuantity}/>
     })
   )
 }
