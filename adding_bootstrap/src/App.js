@@ -1,38 +1,91 @@
-import logo from './logo.svg';
-import './App.css';
-import Navbar from './Components/Navbar';
-import ProductList from './Components/ProductList';
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Navbar from "./Components/Navbar.js"
+import ProductList from "./Components/ProductList.js"
+import Footer from "./Components/Footer.js"
+import AddItem from "./Components/AddItem.js"
 
 function App() {
-  const initialProductList = [
+  const products = [
     {
-      price: 100000,
-      name: "Iphone 12 Max",
+      price: 99999,
+      name: "IPhone 10S Max",
       quantity: 0,
     },
     {
-      price: 20000,
-      name: "Samsung 12 Max",
+      price: 9999,
+      name: "Redmi Note 10S Max",
       quantity: 0,
-    }
+    },
   ];
 
-  const [productlist, setProductList] = useState(initialProductList);
+  let [productList, setProductList] = useState(products);
+  let [totalAmount, setTotalAmount] = useState(0);
 
   const incrementQuantity = (index) => {
-    let newProductList = [...productlist];
+    let newProductList = [...productList];
+    let newTotalAmount = totalAmount;
     newProductList[index].quantity++;
+    newTotalAmount += newProductList[index].price;
+    setTotalAmount(newTotalAmount);
     setProductList(newProductList);
-  }
+  };
+
+  const decrementQuantity = (index) => {
+    let newProductList = [...productList];
+    let newTotalAmount = totalAmount;
+    if (newProductList[index].quantity > 0) {
+      newProductList[index].quantity--;
+      newTotalAmount -= newProductList[index].price;
+    }
+    setTotalAmount(newTotalAmount);
+    setProductList(newProductList);
+  };
+
+  const resetQuantity = () => {
+    let newProductList = [...productList];
+    newProductList.map((products) => {
+      products.quantity = 0;
+    });
+    setProductList(newProductList);
+    setTotalAmount(0);
+  };
+
+  const removeItem = (index) => {
+    let newProductList = [...productList];
+    let newTotalAmount = totalAmount;
+    newTotalAmount -=
+      newProductList[index].quantity * newProductList[index].price;
+    newProductList.splice(index, 1);
+    setProductList(newProductList);
+    setTotalAmount(newTotalAmount);
+  };
+
+  const addItem = (name, price) => {
+    let newProductList = [...productList];
+    newProductList.push({
+      price: price,
+      name: name,
+      quantity: 0,
+    });
+    setProductList(newProductList);
+  };
 
   return (
-    <div>
+    <>
       <Navbar />
-      <main className='container mt-5'>
-        <ProductList productlist={productlist} incrementQuantity={incrementQuantity} />
+      <main className="container mt-5">
+        <AddItem addItem={addItem} />
+        <ProductList
+          productList={productList}
+          incrementQuantity={incrementQuantity}
+          decrementQuantity={decrementQuantity}
+          removeItem={removeItem}
+        />
       </main>
-    </div>
+      <Footer totalAmount={totalAmount} resetQuantity={resetQuantity} />
+    </>
   );
 }
 
