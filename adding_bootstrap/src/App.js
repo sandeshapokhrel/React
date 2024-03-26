@@ -1,90 +1,56 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import Navbar from "./Components/Navbar.js"
-import ProductList from "./Components/ProductList.js"
-import Footer from "./Components/Footer.js"
-import AddItem from "./Components/AddItem.js"
+import Cart from "./Components/cart";
+import Component_Life_Cycle from "./Components/Component_Life_Cycle";
+import List_and_Keys from "./Components/List_and_Keys";
 
 function App() {
-  const products = [
-    {
-      price: 99999,
-      name: "IPhone 10S Max",
-      quantity: 0,
-    },
-    {
-      price: 9999,
-      name: "Redmi Note 10S Max",
-      quantity: 0,
-    },
-  ];
+  // Define a state variable to control cart visibility
+  const [showCart, setShowCart] = useState(false);
 
-  let [productList, setProductList] = useState(products);
-  let [totalAmount, setTotalAmount] = useState(0);
+  // Define a state variable to control lifecycle trigger
+  const [triggerLifecycle, setTriggerLifecycle] = useState(false);
 
-  const incrementQuantity = (index) => {
-    let newProductList = [...productList];
-    let newTotalAmount = totalAmount;
-    newProductList[index].quantity++;
-    newTotalAmount += newProductList[index].price;
-    setTotalAmount(newTotalAmount);
-    setProductList(newProductList);
+  // Define a state variable to control list and key trigger
+  const [triggerListAndKeys, setTriggerListAndKeys] = useState(false);
+
+  // Function to toggle cart visibility
+  const toggleCart = () => {
+    setShowCart(!showCart);
   };
 
-  const decrementQuantity = (index) => {
-    let newProductList = [...productList];
-    let newTotalAmount = totalAmount;
-    if (newProductList[index].quantity > 0) {
-      newProductList[index].quantity--;
-      newTotalAmount -= newProductList[index].price;
-    }
-    setTotalAmount(newTotalAmount);
-    setProductList(newProductList);
+  // Function to toggle lifecycle trigger
+  const toggleLifecycle = () => {
+    setTriggerLifecycle(!triggerLifecycle);
   };
 
-  const resetQuantity = () => {
-    let newProductList = [...productList];
-    newProductList.map((products) => {
-      products.quantity = 0;
-    });
-    setProductList(newProductList);
-    setTotalAmount(0);
-  };
-
-  const removeItem = (index) => {
-    let newProductList = [...productList];
-    let newTotalAmount = totalAmount;
-    newTotalAmount -=
-      newProductList[index].quantity * newProductList[index].price;
-    newProductList.splice(index, 1);
-    setProductList(newProductList);
-    setTotalAmount(newTotalAmount);
-  };
-
-  const addItem = (name, price) => {
-    let newProductList = [...productList];
-    newProductList.push({
-      price: price,
-      name: name,
-      quantity: 0,
-    });
-    setProductList(newProductList);
+  // Function to toggle list and key
+  const toggleListAndKeys = () => {
+    setTriggerListAndKeys(!triggerListAndKeys);
   };
 
   return (
     <>
-      <Navbar />
-      <main className="container mt-5">
-        <AddItem addItem={addItem} />
-        <ProductList
-          productList={productList}
-          incrementQuantity={incrementQuantity}
-          decrementQuantity={decrementQuantity}
-          removeItem={removeItem}
-        />
-      </main>
-      <Footer totalAmount={totalAmount} resetQuantity={resetQuantity} />
+      {/* Button to toggle cart visibility */}
+      <button onClick={toggleCart}>Open Cart</button>
+
+      {/* Conditional rendering of the cart component */}
+      {showCart && <Cart />}
+
+      {/* Button to toggle lifecycle execution */}
+      <button onClick={toggleLifecycle}>
+        {triggerLifecycle ? "Turn off Lifecycle" : "Turn on Lifecycle"}
+      </button>
+
+      {/* Render Component_Life_Cycle with triggerLifecycle prop */}
+      {triggerLifecycle && <Component_Life_Cycle />}
+
+      {/* Button to toggle list and key */}
+      <button onClick={toggleListAndKeys}>
+        {triggerListAndKeys ? "Hide List and Keys" : "Show List and Keys"}
+      </button>
+
+      {/* Render List_and_Keys with triggerListAndKeys prop */}
+      {triggerListAndKeys && <List_and_Keys />}
     </>
   );
 }
