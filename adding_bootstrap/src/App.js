@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import Cart from "./Components/cart";
 import Component_Life_Cycle from "./Components/Component_Life_Cycle";
 import List_and_Keys from "./Components/List_and_Keys";
-import Higher_Order_component from "./Components/Higher_Order_component";
+import FavoriteColor from "./Components/Hook_useState";
+import HOC from "./Components/Higher_Order_component";
+import Timer from "./Components/Hook_useEffect";
+
+// Import the createApp function from your authentication components
+import createApp from "./Components/Other_Hooks";
 
 function App() {
   // Define a state variable to control cart visibility
@@ -16,6 +21,15 @@ function App() {
 
   // Define a state variable to control HOC trigger
   const [triggerHOC, setTriggerHOC] = useState(false);
+
+  // Define a state variable to control FavoriteColor component trigger
+  const [triggerFC, setTriggerFC] = useState(false);
+
+  // Define a state variable to control Timer component trigger
+  const [triggerTimer, setTriggerTimer] = useState(false);
+
+  // Define a state variable to control authentication component trigger
+  const [triggerAuth, setTriggerAuth] = useState(false);
 
   // Function to toggle cart visibility
   const toggleCart = () => {
@@ -35,6 +49,21 @@ function App() {
   // Function to toggle HOC
   const toggleHOC = () => {
     setTriggerHOC(!triggerHOC);
+  };
+
+  // Function to toggle FavoriteColor component
+  const toggleFC = () => {
+    setTriggerFC(!triggerFC);
+  };
+
+  // Function to toggle Timer component
+  const toggleTimer = () => {
+    setTriggerTimer(!triggerTimer);
+  };
+
+  // Function to toggle authentication components
+  const toggleAuth = () => {
+    setTriggerAuth(!triggerAuth);
   };
 
   return (
@@ -67,7 +96,31 @@ function App() {
       </button>
 
       {/* Render HOC component based on triggerHOC */}
-      {triggerHOC && <Higher_Order_component />}
+      {triggerHOC && <HOC />}
+
+      {/* Button to toggle FavoriteColor component */}
+      <button onClick={toggleFC}>
+        {triggerFC ? "Disable FC" : "Enable FC"}
+      </button>
+
+      {/* Render FavoriteColor component based on triggerFC */}
+      {triggerFC && <FavoriteColor />}
+
+      {/* Button to toggle Timer component */}
+      <button onClick={toggleTimer}>
+        {triggerTimer ? "Disable Timer" : "Enable Timer"}
+      </button>
+
+      {/* Render Timer component based on triggerTimer */}
+      {triggerTimer && <Timer />}
+
+      {/* Button to toggle authentication components */}
+      <button onClick={toggleAuth}>
+        {triggerAuth ? "Disable Authentication" : "Enable Authentication"}
+      </button>
+
+      {/* Render authentication components based on triggerAuth */}
+      {triggerAuth && <createApp />}
     </>
   );
 }

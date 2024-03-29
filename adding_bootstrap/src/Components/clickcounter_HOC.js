@@ -1,4 +1,4 @@
-const clickcounter_HOC = () => {
+const Clickcounter_HOC = () => {
     return (
     <div>
         <button>click me</button>
@@ -6,4 +6,4 @@ const clickcounter_HOC = () => {
     </div>
     )
 }
-export default clickcounter_HOC;
+export default Clickcounter_HOC;

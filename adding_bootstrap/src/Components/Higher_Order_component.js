@@ -1,13 +1,13 @@
 //H0C is a advance technique in react for reusing component logic. 
 //it is not the part of reactAPI
-import React, { Component } from 'react'
-//import clickcounter_HOC from '.Components./clickcounter_HOC';
+import React from 'react'
+import Clickcounter_HOC from './clickcounter_HOC';
 
-function App (){
+function HOC (){
  return (
     <div className='App'>
-        <clickcounter_HOC />
+        <Clickcounter_HOC />
     </div>
  );
 }
-export default App;
+export default HOC;

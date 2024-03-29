@@ -7,7 +7,7 @@
 //Short Circuit Operation
 
 import React from 'react'
-import age_Rendering from './age_Rendering';
+import age_Rendering from './Component/age_Rendering';
 function Render (){
     return (
         <div children="app">
