@@ -6,13 +6,16 @@
 //Ternary Operator
 //Short Circuit Operation
 
-import React from 'react'
-import age_Rendering from './Component/age_Rendering';
-function Render (){
-    return (
-        <div children="app">
-           <age_Rendering/>
-        </div>
-    );
+// Render.js
+import React from 'react';
+import AgeRendering from './age_Rendering';
+
+function Render() {
+  return (
+    <div>
+      <AgeRendering />
+    </div>
+  );
 }
+
 export default Render;
