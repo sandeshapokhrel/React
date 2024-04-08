@@ -1,12 +1,14 @@
-import React from 'react';
-import GreenBackground from './Component/create';
+// App.js
 
-const App = () => {
+import React from 'react';
+import Card from './Component/Card';
+
+function App() {
   return (
-    <div>
-      <GreenBackground />
+    <div className="App">
+      <Card />
     </div>
   );
-};
+}
 
 export default App;
